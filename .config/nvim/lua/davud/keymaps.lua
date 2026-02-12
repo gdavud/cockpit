@@ -47,3 +47,7 @@ vim.keymap.set("n", "<Esc>", function()
 	end
 	return "<Esc>"
 end, { expr = true, silent = true })
+
+-- sql
+vim.keymap.set("n", "<leader>dq", ":DBUI<CR>", { buffer = true, desc = "Open DB UI" })
+vim.keymap.set("n", "<leader>dr", "vip:DB<CR>", { buffer = true, desc = "Run paragraph" })

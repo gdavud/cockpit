@@ -262,6 +262,8 @@ return {
 						},
 					},
 				},
+
+				postgres_lsp = {},
 			}
 
 			-- To check the current status of installed tools and/or manually install
@@ -344,6 +346,7 @@ return {
 				c = { "clang_format" },
 				cpp = { "clang_format" },
 				h = { "clang_format" },
+				sql = { "pg_format" },
 			},
 		},
 	},

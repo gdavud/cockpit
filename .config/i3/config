@@ -175,3 +175,6 @@ bar {
 set $term /usr/bin/alacritty
 bindsym $mod+Return exec --no-startup-id $term
 exec_always --no-startup-id sh -c 'until xset q >/dev/null 2>&1; do sleep 0.1; done; sleep 0.3; xset r rate 250 50'
+
+bindsym $mod+Shift+m exec --no-startup-id sh -c 'autorandr --load mobile && notify-send "Display: mobile"'
+bindsym $mod+Shift+d exec --no-startup-id sh -c 'autorandr --load docked && notify-send "Display: docked"'
