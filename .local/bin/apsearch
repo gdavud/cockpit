@@ -1,0 +1,5 @@
+#!/bin/bash
+query=$(printf "" | dmenu -p "ArduPilot")
+[ -z "$query" ] && exit
+
+xdg-open "https://duckduckgo.com/?q=site:ardupilot.org+$query"

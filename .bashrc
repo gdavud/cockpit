@@ -48,3 +48,8 @@ y() {
         [ -d "$dir" ] && cd "$dir"
     fi
 }
+
+export PATH=$PATH:$HOME/ardupilot/Tools/autotest
+export PATH=/usr/lib/ccache:$PATH
+export PATH=$PATH:/home/$USER/arm-gnu-toolchain/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin
+export PATH=$PATH:$HOME/jsbsim/build/src

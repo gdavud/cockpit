@@ -79,7 +79,7 @@ bindsym $mod+v       split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -90,7 +90,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -178,3 +178,11 @@ exec_always --no-startup-id sh -c 'until xset q >/dev/null 2>&1; do sleep 0.1; d
 
 bindsym $mod+Shift+m exec --no-startup-id sh -c 'autorandr --load mobile && notify-send "Display: mobile"'
 bindsym $mod+Shift+d exec --no-startup-id sh -c 'autorandr --load docked && notify-send "Display: docked"'
+
+bindsym Print exec --no-startup-id sh -c 'mkdir -p ~/screenshots && maim ~/screenshots/$(date +%F-%T).png'
+bindsym Shift+Print exec --no-startup-id sh -c 'mkdir -p ~/screenshots && maim -s ~/screenshots/$(date +%F-%T).png'
+bindsym $mod+Print exec --no-startup-id sh -c 'maim -s | xclip -selection clipboard -t image/png'
+
+# dmenu for web search (and ap)
+bindsym $mod+s exec ~/.local/bin/websearch
+bindsym $mod+a exec ~/.local/bin/apsearch

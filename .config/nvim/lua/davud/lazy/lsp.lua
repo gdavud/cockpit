@@ -35,18 +35,18 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 return {
-	{
-		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-		-- used for completion, annotations and signatures of Neovim apis
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
-	},
+	-- {
+	-- 	-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+	-- 	-- used for completion, annotations and signatures of Neovim apis
+	-- 	"folke/lazydev.nvim",
+	-- 	ft = "lua",
+	-- 	opts = {
+	-- 		library = {
+	-- 			-- Load luvit types when the `vim.uv` word is found
+	-- 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+	-- 		},
+	-- 	},
+	-- },
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
@@ -254,6 +254,21 @@ return {
 					-- capabilities = {},
 					settings = {
 						Lua = {
+							runtime = {
+								version = "Lua 5.3",
+								path = {
+									"?.lua",
+									"?/init.lua",
+									"scripts/?.lua",
+									"scripts/?/init.lua",
+								},
+							},
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									vim.fn.expand("~/ardupilot/libraries/AP_Scripting/docs"),
+								},
+							},
 							completion = {
 								callSnippet = "Replace",
 							},
@@ -382,7 +397,7 @@ return {
 				},
 				opts = {},
 			},
-			"folke/lazydev.nvim",
+			-- "folke/lazydev.nvim",
 		},
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
@@ -428,10 +443,11 @@ return {
 			},
 
 			sources = {
-				default = { "lsp", "path", "snippets", "lazydev" },
-				providers = {
-					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
-				},
+				default = { "lsp", "path", "snippets" },
+				-- default = { "lsp", "path", "snippets", "lazydev" },
+				-- providers = {
+				-- 	lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+				-- },
 			},
 
 			snippets = { preset = "luasnip" },
