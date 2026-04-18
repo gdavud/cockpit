@@ -7,14 +7,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-	callback = function()
-		vim.bo.tabstop = 2
-		vim.bo.shiftwidth = 2
-		vim.bo.expandtab = true
-	end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+-- 	callback = function()
+-- 		vim.bo.tabstop = 2
+-- 		vim.bo.shiftwidth = 2
+-- 		vim.bo.expandtab = true
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "cpp", "h", "c" },
@@ -246,7 +246,7 @@ return {
 				--    https://github.com/pmizio/typescript-tools.nvim
 				--
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				ts_ls = {},
+				-- ts_ls = {},
 
 				lua_ls = {
 					-- cmd = { ... },
@@ -278,7 +278,7 @@ return {
 					},
 				},
 
-				postgres_lsp = {},
+				-- postgres_lsp = {},
 			}
 
 			-- To check the current status of installed tools and/or manually install

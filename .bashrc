@@ -1,31 +1,71 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# cockpit - .dotfiles
-# alias cockpit='/usr/bin/git --git-dir=$HOME/cockpit/ --work-tree=$HOME'
-alias cockpit='/usr/bin/git --git-dir=$HOME/cockpit/'
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
+# append to the history file, don't overwrite it
+shopt -s histappend
 
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Alias definitions.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# local bin
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:/home/davud/bin"
-export TERM=tmux-256color
-export TERMINFO=$HOME/.terminfo
-export EDITOR=nvim
-export VISUAL=nvim
-
-# node
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -34,22 +74,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
 export FZF_DEFAULT_OPTS='--height 100% --layout=reverse --border'
 
-# nvim alias
-vim() {
-    nvim .
-}
+# ardupilot
+export PATH=$PATH:$HOME/workspace/ardupilot/Tools/autotest
 
-y() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-    yazi "$@" --cwd-file="$tmp"
-    if [ -f "$tmp" ]; then
-        local dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && cd "$dir"
-    fi
-}
-
-export PATH=$PATH:$HOME/ardupilot/Tools/autotest
+# ccache
 export PATH=/usr/lib/ccache:$PATH
-export PATH=$PATH:/home/$USER/arm-gnu-toolchain/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin
-export PATH=$PATH:$HOME/jsbsim/build/src

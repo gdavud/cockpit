@@ -42,7 +42,6 @@ return {
 			})
 
 			vim.cmd.colorscheme("rose-pine")
-			CustomPaint()
 		end,
 	},
 	-- {
