@@ -51,3 +51,8 @@ end, { expr = true, silent = true })
 -- sql
 vim.keymap.set("n", "<leader>dq", ":DBUI<CR>", { buffer = true, desc = "Open DB UI" })
 vim.keymap.set("n", "<leader>dr", "vip:DB<CR>", { buffer = true, desc = "Run paragraph" })
+
+vim.keymap.set("n", "<leader>tf", function()
+	vim.g.autoformat_enabled = not vim.g.autoformat_enabled
+	print("Autoformat: " .. (vim.g.autoformat_enabled and "ON" or "OFF"))
+end, { desc = "toggle autoformat" })

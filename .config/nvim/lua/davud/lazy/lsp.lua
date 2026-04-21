@@ -7,15 +7,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
--- 	callback = function()
--- 		vim.bo.tabstop = 2
--- 		vim.bo.shiftwidth = 2
--- 		vim.bo.expandtab = true
--- 	end,
--- })
-
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "cpp", "h", "c" },
 	callback = function()
@@ -197,26 +188,9 @@ return {
 				severity_sort = true,
 				float = { border = "rounded", source = "if_many" },
 				underline = { severity = vim.diagnostic.severity.ERROR },
-				signs = vim.g.have_nerd_font and {
-					text = {
-						[vim.diagnostic.severity.ERROR] = "󰅚 ",
-						[vim.diagnostic.severity.WARN] = "󰀪 ",
-						[vim.diagnostic.severity.INFO] = "󰋽 ",
-						[vim.diagnostic.severity.HINT] = "󰌶 ",
-					},
-				} or {},
 				virtual_text = {
 					source = "if_many",
 					spacing = 2,
-					format = function(diagnostic)
-						local diagnostic_message = {
-							[vim.diagnostic.severity.ERROR] = diagnostic.message,
-							[vim.diagnostic.severity.WARN] = diagnostic.message,
-							[vim.diagnostic.severity.INFO] = diagnostic.message,
-							[vim.diagnostic.severity.HINT] = diagnostic.message,
-						}
-						return diagnostic_message[diagnostic.severity]
-					end,
 				},
 			})
 
@@ -332,6 +306,14 @@ return {
 		opts = {
 			notify_on_error = false,
 			format_on_save = function(bufnr)
+				if not vim.g.autoformat_enabled then
+					return nil
+				end
+
+				if vim.b[bufnr].autoformat_enabled == false then
+					return nil
+				end
+
 				-- Disable "format_on_save lsp_fallback" for languages that don't
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
