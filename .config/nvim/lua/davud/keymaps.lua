@@ -30,29 +30,12 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
 
--- Esc in command-line: if we're doing / or ?, treat Esc like Enter
-vim.keymap.set("c", "<Esc>", function()
-	local t = vim.fn.getcmdtype()
-	if t == "/" or t == "?" then
-		return "<CR>" -- accept the match instead of cancel
-	end
-	return "<Esc>"
-end, { expr = true })
-
--- Esc in normal mode: first Esc clears highlight; otherwise just Esc
-vim.keymap.set("n", "<Esc>", function()
-	if vim.v.hlsearch == 1 then
-		vim.cmd("nohlsearch")
-		return ""
-	end
-	return "<Esc>"
-end, { expr = true, silent = true })
-
--- sql
-vim.keymap.set("n", "<leader>dq", ":DBUI<CR>", { buffer = true, desc = "Open DB UI" })
-vim.keymap.set("n", "<leader>dr", "vip:DB<CR>", { buffer = true, desc = "Run paragraph" })
-
+-- autoformat toggle
 vim.keymap.set("n", "<leader>tf", function()
 	vim.g.autoformat_enabled = not vim.g.autoformat_enabled
 	print("Autoformat: " .. (vim.g.autoformat_enabled and "ON" or "OFF"))
 end, { desc = "toggle autoformat" })
+
+-- sql
+vim.keymap.set("n", "<leader>dq", ":DBUI<CR>", { buffer = true, desc = "Open DB UI" })
+vim.keymap.set("n", "<leader>dr", "vip:DB<CR>", { buffer = true, desc = "Run paragraph" })
