@@ -1,30 +1,3 @@
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lua",
-	callback = function()
-		vim.bo.tabstop = 2
-		vim.bo.shiftwidth = 2
-		vim.bo.expandtab = true
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "cpp", "h", "c" },
-	callback = function()
-		vim.bo.tabstop = 4
-		vim.bo.shiftwidth = 4
-		vim.bo.expandtab = true
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "md", "txt" },
-	callback = function()
-		vim.bo.tabstop = 2
-		vim.bo.shiftwidth = 2
-		vim.bo.expandtab = true
-	end,
-})
-
 return {
 	-- {
 	-- 	-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -188,10 +161,7 @@ return {
 				severity_sort = true,
 				float = { border = "rounded", source = "if_many" },
 				underline = { severity = vim.diagnostic.severity.ERROR },
-				virtual_text = {
-					source = "if_many",
-					spacing = 2,
-				},
+				virtual_text = false,
 			})
 
 			-- LSP servers and clients are able to communicate to each other what features they support.

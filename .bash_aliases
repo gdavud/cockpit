@@ -4,6 +4,3 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # cockpit - .dotfiles
 alias cockpit='/usr/bin/git --git-dir=$HOME/cockpit/'
-
-# nvim alias
-alias vim='nvim .'

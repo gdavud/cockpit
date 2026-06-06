@@ -41,8 +41,8 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -52,7 +52,7 @@ fi
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Alias definitions.
+# alias definitions.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -83,14 +83,16 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
 export FZF_DEFAULT_OPTS='--height 100% --layout=reverse --border'
 
-# ardupilot
-export PATH=$PATH:$HOME/workspace/jsbsim/build/src
-export PATH=$PATH:$HOME/workspace/ardupilot/Tools/autotest
-export GZ_SIM_SYSTEM_PLUGIN_PATH=$HOME/workspace/gz_ws/src/ardupilot_gazebo/build:$GZ_SIM_SYSTEM_PLUGIN_PATH
-export GZ_SIM_RESOURCE_PATH=$HOME/workspace/gz_ws/src/ardupilot_gazebo/models:$HOME/workspace/gz_ws/src/ardupilot_gazebo/worlds:$GZ_SIM_RESOURCE_PATH
-export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/workspace/SITL_Models/Gazebo/models:$HOME/workspace/SITL_Models/Gazebo/worlds
+# # ardupilot
+# export PATH=$PATH:$HOME/workspace/jsbsim/build/src
+# xport PATH=$PATH:$HOME/workspace/ardupilot/Tools/autotest
+# export GZ_SIM_SYSTEM_PLUGIN_PATH=$HOME/workspace/gz_ws/src/ardupilot_gazebo/build:$GZ_SIM_SYSTEM_PLUGIN_PATH
+# export GZ_SIM_RESOURCE_PATH=$HOME/workspace/gz_ws/src/ardupilot_gazebo/models:$HOME/workspace/gz_ws/src/ardupilot_gazebo/worlds:$GZ_SIM_RESOURCE_PATH
+# export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/workspace/SITL_Models/Gazebo/models:$HOME/workspace/SITL_Models/Gazebo/worlds
 
-# ccache
-export PATH=/usr/lib/ccache:$PATH
-source $HOME/workspace/ardupilot/Tools/completion/completion.bash
-source $HOME/workspace/ardupilot/Tools/completion/completion.bash
+# # ccache
+# export PATH=/usr/lib/ccache:$PATH
+
+# opencode
+export PATH=/home/d/.opencode/bin:$PATH
+export EDITOR="nvim"

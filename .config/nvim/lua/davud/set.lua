@@ -8,8 +8,7 @@ vim.o.guicursor = "n-v-c-i:block"
 
 vim.g.have_nerd_font = true
 
--- don't like it
-vim.o.cursorline = false
+vim.o.cursorline = true
 
 -- can't be a 10x without this...
 vim.o.relativenumber = true
@@ -33,9 +32,10 @@ vim.o.undofile = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.incsearch = true
+vim.o.hlsearch = true
 
--- Keep signcolumn on by default
-vim.o.signcolumn = "no"
+vim.o.signcolumn = "yes"
 
 -- Decrease update time
 vim.o.updatetime = 250

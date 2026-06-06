@@ -6,10 +6,6 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true }) -- Move
 -- open file explorer
 vim.keymap.set("n", "<C-b>", vim.cmd.Ex)
 
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostics in float" })
@@ -26,16 +22,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- or just use <C-\><C-n> to exit terminal mode
 -- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Better search UX
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
-
 -- autoformat toggle
 vim.keymap.set("n", "<leader>tf", function()
 	vim.g.autoformat_enabled = not vim.g.autoformat_enabled
 	print("Autoformat: " .. (vim.g.autoformat_enabled and "ON" or "OFF"))
 end, { desc = "toggle autoformat" })
-
--- sql
-vim.keymap.set("n", "<leader>dq", ":DBUI<CR>", { buffer = true, desc = "Open DB UI" })
-vim.keymap.set("n", "<leader>dr", "vip:DB<CR>", { buffer = true, desc = "Run paragraph" })
