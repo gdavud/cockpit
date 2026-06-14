@@ -83,13 +83,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
 export FZF_DEFAULT_OPTS='--height 100% --layout=reverse --border'
 
-# # ardupilot
-# export PATH=$PATH:$HOME/workspace/jsbsim/build/src
-# xport PATH=$PATH:$HOME/workspace/ardupilot/Tools/autotest
-# export GZ_SIM_SYSTEM_PLUGIN_PATH=$HOME/workspace/gz_ws/src/ardupilot_gazebo/build:$GZ_SIM_SYSTEM_PLUGIN_PATH
-# export GZ_SIM_RESOURCE_PATH=$HOME/workspace/gz_ws/src/ardupilot_gazebo/models:$HOME/workspace/gz_ws/src/ardupilot_gazebo/worlds:$GZ_SIM_RESOURCE_PATH
-# export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/workspace/SITL_Models/Gazebo/models:$HOME/workspace/SITL_Models/Gazebo/worlds
-
 # # ccache
 # export PATH=/usr/lib/ccache:$PATH
 

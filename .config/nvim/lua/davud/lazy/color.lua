@@ -1,28 +1,3 @@
-function CustomPaint()
-	vim.api.nvim_set_hl(0, "Visual", { bg = "#303030" })
-
-	-- background black globally
-	vim.cmd([[
-	  hi Normal guibg=#000000
-	  hi NormalNC guibg=#000000
-	  hi SignColumn guibg=#000000
-	  hi LineNr guibg=#000000
-	]])
-
-	-- telescope specific windows
-	vim.cmd([[
-	  hi TelescopeSelection guibg=#303030
-	  hi TelescopeNormal guibg=#000000
-	  hi TelescopeBorder guibg=#000000
-	  hi TelescopePromptNormal guibg=#000000
-	  hi TelescopePromptBorder guibg=#000000
-	  hi TelescopeResultsNormal guibg=#000000
-	  hi TelescopeResultsBorder guibg=#000000
-	  hi TelescopePreviewNormal guibg=#000000
-	  hi TelescopePreviewBorder guibg=#000000
-	]])
-end
-
 return {
 	{
 		"rose-pine/neovim",
@@ -31,42 +6,83 @@ return {
 		priority = 1000,
 		config = function()
 			require("rose-pine").setup({
-				disable_background = false,
+				disable_background = true,
 				styles = {
 					italic = false,
 					bold = false,
 				},
-				highlight_groups = {
-					CursorLine = { bg = "#121212" },
-				},
 			})
 
 			vim.cmd.colorscheme("rose-pine")
+
+			local function force_black()
+				local black = "#000000"
+				local dark = "#121212"
+				local sel = "#303030"
+
+				local groups = {
+					"Normal",
+					"NormalNC",
+					"NormalFloat",
+					"FloatBorder",
+					"SignColumn",
+					"LineNr",
+
+					"TelescopeNormal",
+					"TelescopeBorder",
+					"TelescopePromptNormal",
+					"TelescopePromptBorder",
+					"TelescopeResultsNormal",
+					"TelescopeResultsBorder",
+					"TelescopePreviewNormal",
+					"TelescopePreviewBorder",
+				}
+
+				for _, group in ipairs(groups) do
+					vim.api.nvim_set_hl(0, group, { bg = black })
+				end
+
+				vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = sel })
+				vim.api.nvim_set_hl(0, "Visual", { bg = sel })
+				vim.api.nvim_set_hl(0, "CursorLine", { bg = dark })
+
+				local no_bold = {
+					"Statement",
+					"Keyword",
+					"Conditional",
+					"Repeat",
+					"Number",
+					"Constant",
+
+					"@keyword",
+					"@keyword.return",
+					"@keyword.return.lua",
+					"@number",
+					"@number.lua",
+					"@constant",
+					"@constant.lua",
+				}
+
+				for _, group in ipairs(no_bold) do
+					vim.api.nvim_set_hl(0, group, { bold = false })
+				end
+			end
+
+			force_black()
+
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				pattern = "*",
+				callback = force_black,
+			})
 		end,
 	},
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		---@diagnostic disable-next-line: missing-fields
-	-- 		require("tokyonight").setup({
-	-- 			styles = {
-	-- 				comments = { italic = false },
-	-- 				keywords = { italic = false },
-	-- 				functions = { italic = false },
-	-- 				variables = { italic = false },
-	-- 				italic = false,
-	-- 			},
-	-- 		})
-	--
-	-- 		vim.cmd.colorscheme("tokyonight-night")
-	-- 		CustomPaint()
-	-- 	end,
-	-- },
+
 	{
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = { signs = false },
+		opts = {
+			signs = false,
+		},
 	},
 }
